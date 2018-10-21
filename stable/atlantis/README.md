@@ -8,7 +8,7 @@ This chart creates a single pod in a StatefulSet running Atlantis.  Atlantis per
 
 ## Prerequisites
 
-- Kubernetes 1.6+
+- Kubernetes 1.9+
 - PersistentVolume support
 
 ## Required Configuration
