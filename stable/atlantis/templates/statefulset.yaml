@@ -30,12 +30,12 @@ spec:
       {{- if .Values.gitconfig }}
       - name: gitconfig-volume
         secret:
-          secretName: {{ template "atlantis.name" . }}-gitconfig
+          secretName: {{ template "atlantis.fullname" . }}-gitconfig
       {{- end }}
       {{- if .Values.aws }}
       - name: aws-volume
         secret:
-          secretName: {{ template "atlantis.name" . }}-aws
+          secretName: {{ template "atlantis.fullname" . }}-aws
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
