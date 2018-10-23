@@ -8,7 +8,7 @@
 
 # Replace this with your own repo whitelist:
 orgWhitelist: github.com/yourorg/*
-
+requireApproval: false
 # If using GitHub, specify like the following:
 # github:
 #   user: foo

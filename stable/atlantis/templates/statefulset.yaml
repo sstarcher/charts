@@ -18,6 +18,10 @@ spec:
       labels:
         app: {{ template "atlantis.name" . }}
         release: {{ .Release.Name }}
+  {{- with .Values.annotations }}
+      annotations:
+  {{ toYaml . | indent 10 }}
+  {{- end }}
     spec:
       securityContext:
         fsGroup: 1000
@@ -57,12 +61,18 @@ spec:
           - name: atlantis
             containerPort: 4141
           env:
+          {{- range $key, $value := .Values.environment }}
+          - name: {{ $key }}
+            value: {{ $value | quote }}
+          {{- end }}
           - name: ATLANTIS_DATA_DIR
             value: /atlantis-data
           - name: ATLANTIS_REPO_WHITELIST
             value: {{ .Values.orgWhitelist }}
           - name: ATLANTIS_PORT
             value: "4141"
+          - name: ATLANTIS_REQUIRE_APPROVAL
+            value: {{ .Values.requireApproval | quote }}
           {{- if .Values.atlantisUrl }}
           - name: ATLANTIS_ATLANTIS_URL
             value: {{ .Values.atlantisUrl }}
